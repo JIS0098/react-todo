@@ -40,7 +40,8 @@ function App() {
             </div>
           </Col>
           <Col className="number" lg={3}>
-            <div>폰저장</div>
+            <div className="number-background phone-book">연락처</div>
+            <div className="number-background phone-save">폰저장</div>
           </Col>
         </Row>
       </Container>

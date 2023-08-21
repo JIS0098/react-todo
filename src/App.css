@@ -2,10 +2,23 @@
   padding-top: 30px;
 }
 
-
 .number{
-  border: 1px solid black;
+  height: 550px;
 }
+
+.number-background{
+  background-color:  #e4e4e4;
+  border-radius: 10px;
+}
+.phone-book{
+  height: 100%;
+}
+
+.phone-save{
+  height: 50%;
+  margin-top: 10px;
+}
+
 input{
   width: 60%;
   padding: 5px;
