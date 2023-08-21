@@ -6,11 +6,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function App() {
   let [text, setText] = useState('')
+  let [task, setTask] = useState([])
 
   useEffect(() => {
     if (!localStorage.getItem("todoList")) {
       localStorage.setItem('todoList', JSON.stringify([]))
     }
+
+    let todoList = JSON.parse(localStorage.getItem('todoList'))
+    setTask([...todoList])
+
   }, [])
 
   return (
@@ -23,13 +28,15 @@ function App() {
             <button onClick={() => {
               let todoList = JSON.parse(localStorage.getItem('todoList'))
               todoList.push(text);
+              setTask([...todoList])
               localStorage.setItem('todoList', JSON.stringify(todoList))
             }}>+</button>
-            <div>
-            <div>오늘할일 밥먹기</div>
-            <div>
-              <div><i class="far fa-eraser"></i></div>
-            </div>
+            <div className="taskList">
+              {
+                task.map((a) => {
+                  return <Task task={a} />
+                })
+              }
             </div>
           </Col>
           <Col className="number" lg={3}>
@@ -41,10 +48,13 @@ function App() {
   );
 }
 
-function Task() {
+function Task({ task }) {
   return (
     <div>
-
+      <div>{task}</div>
+      <div>
+        <div>버튼자리</div>
+      </div>
     </div>
 
   )
