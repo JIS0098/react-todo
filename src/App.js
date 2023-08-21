@@ -2,7 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Form from 'react-bootstrap/Form';
 
 function App() {
   let [text, setText] = useState('')
@@ -49,15 +49,14 @@ function App() {
   );
 }
 
+
+
 function Task({ task }) {
   return (
-    <div>
-      <div>{task}</div>
-      <div>
-        <div>버튼자리</div>
-      </div>
+    <div className="task">
+      <Form.Check className="task-check"/>
+      <p>{task}</p>
     </div>
-
   )
 }
 
