@@ -76,7 +76,7 @@ button {
 }
 
 button:hover {
-  border: 1px solid rgb(153, 153, 153);
+  border: none;
   background-color: lightgray;
   color: rgb(136, 136, 136);
   transition: 0.2s;
@@ -89,6 +89,12 @@ h1 {
 .delete {
   color: lightgray;
   padding: 0 10px;
+  cursor:pointer;
+}
+
+.delete:hover{
+  color: rgb(56, 56, 56);
+  transition: all 0.4s;
 }
 
 .done {

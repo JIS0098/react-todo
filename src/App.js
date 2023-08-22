@@ -11,10 +11,10 @@ function App() {
   let [text, setText] = useState('')
   let [task, setTask] = useState([])
   var newID = function () {
-  return Math.random().toString(36).substr(2, 16);
-}
- 
-  
+    return Math.random().toString(36).substr(2, 16);
+  }
+
+
   useEffect(() => {
     if (!localStorage.getItem("todoList")) {
       localStorage.setItem('todoList', JSON.stringify([]))
@@ -31,12 +31,17 @@ function App() {
         <Row>
           <h1>ToDo</h1>
           <Col className="list" lg={8}>
-            <input onChange={(e) => { 
-              setText(e.target.value) }} placeholder=" Add Task" />
-            <button onClick={() => {
+            <input onClick={(e) => {
+              if (e.target.value) {
+                e.target.value.innerText = ""
+              }
+            }} onChange={(e) => {
+              setText(e.target.value)
+            }} placeholder=" Add Task" />
+            <button onClick={(e) => {
               let template = {
-                taskContent:text,
-                id:newID(),
+                taskContent: text,
+                id: newID(),
                 isComplete: false,
               }
               let todoList = JSON.parse(localStorage.getItem('todoList'))
@@ -64,28 +69,28 @@ function App() {
 
 
 
-function Task({ task,setTask }) {
+function Task({ task, setTask }) {
   let [fade, setFade] = useState('')
   let todoList = JSON.parse(localStorage.getItem('todoList'))
-  let index = todoList.findIndex((a)=>{
+  let index = todoList.findIndex((a) => {
     return a.id === task.id
   })
 
   return (
-    <div className={`task start ${task.isComplete? "done":""}`}>
-      <Form.Check onClick={()=>{
+    <div className={`task start ${task.isComplete ? "done" : ""}`}>
+      <Form.Check  onClick={() => {
         let copy = [...todoList]
-        if(!copy[index].isComplete){
-          copy[index].isComplete=true
-        }else{
-          copy[index].isComplete=false
+        if (!copy[index].isComplete) {
+          copy[index].isComplete = true
+        } else {
+          copy[index].isComplete = false
         }
         setTask([...copy])
         localStorage.setItem('todoList', JSON.stringify(copy));
-      }} className="task-check"/>
+      }} className="task-check" />
       <p>{task.taskContent}</p>
-      <FontAwesomeIcon onClick={()=>{
-        todoList.splice(index,1)
+      <FontAwesomeIcon onClick={() => {
+        todoList.splice(index, 1)
         setTask([...todoList])
         localStorage.setItem('todoList', JSON.stringify(todoList));
       }} className="delete fa-lg" icon={faEraser} />
