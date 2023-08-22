@@ -1,75 +1,97 @@
 .App {
   padding-top: 30px;
 }
-.task{
+
+.task {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px;
+  width: 90%;
   border-bottom: 1px solid rgb(233, 233, 233);
 }
 
-
-.task >* {
+.task>* {
   margin: 0;
   padding: 7px;
 }
-p{
+
+p {
   font-size: 14px;
+
 }
-.number{
+
+.number {
   height: 550px;
 }
-.task-check{
+
+.task-check {
   margin-right: 20px;
 }
-.number-background{
-  background-color:  #e4e4e4;
+
+.number-background {
+  background-color: #e4e4e4;
   border-radius: 10px;
 }
-.phone-book{
+
+.phone-book {
   height: 100%;
 }
 
-.phone-save{
+.phone-save {
   height: 50%;
   margin-top: 10px;
 }
 
-input{
+input {
   width: 70%;
   padding: 5px;
   border: 1px solid rgb(228, 228, 228);
   border-radius: 5px;
-  background-color:white ;
-  
+  background-color: white;
+
 }
-input::-webkit-input-placeholder{
-  color:lightgray;
+
+input::-webkit-input-placeholder {
+  color: lightgray;
 }
 
 
 input:focus::-webkit-input-placeholder {
-  color:transparent; 
+  color: transparent;
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
 
-button{
+button {
   margin-left: 2px;
   width: 36px;
   height: 36px;
   border: 1px solid rgb(228, 228, 228);
   border-radius: 5px;
-  background-color:rgb(255, 255, 255);
-  color:rgb(197, 197, 197);
+  background-color: rgb(255, 255, 255);
+  color: rgb(197, 197, 197);
 }
-button:hover{
+
+button:hover {
   border: 1px solid rgb(153, 153, 153);
-  background-color:lightgray;
+  background-color: lightgray;
   color: rgb(136, 136, 136);
   transition: 0.2s;
 }
 
 h1 {
-  text-align:left;
+  text-align: left;
+}
+
+.delete {
+  color: lightgray;
+  padding: 0 10px;
+}
+
+.done {
+  text-decoration: line-through;
+  transition: all 0.5s;
 }
