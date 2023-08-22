@@ -71,13 +71,6 @@ function Task({ task,setTask }) {
     return a.id === task.id
   })
 
-  // useEffect(()=>{
-  //   setTimeout(()=>{ setFade('end') }, 100)
-  //   return ()=>{
-  //     setFade('')
-  //   }
-  // }, [task.isComplete])
-
   return (
     <div className={`task start ${task.isComplete? "done":""}`}>
       <Form.Check onClick={()=>{
@@ -88,9 +81,6 @@ function Task({ task,setTask }) {
           copy[index].isComplete=false
         }
         setTask([...copy])
-        if(task.isComplete){
-          
-        }
         localStorage.setItem('todoList', JSON.stringify(copy));
       }} className="task-check"/>
       <p>{task.taskContent}</p>
