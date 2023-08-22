@@ -11,14 +11,13 @@
   border-bottom: 1px solid rgb(233, 233, 233);
 }
 
-.task>* {
+.task > * {
   margin: 0;
   padding: 7px;
 }
 
 p {
   font-size: 14px;
-
 }
 
 .number {
@@ -43,19 +42,17 @@ p {
   margin-top: 10px;
 }
 
-input {
+.list input {
   width: 70%;
   padding: 5px;
   border: 1px solid rgb(228, 228, 228);
   border-radius: 5px;
   background-color: white;
-
 }
 
 input::-webkit-input-placeholder {
   color: lightgray;
 }
-
 
 input:focus::-webkit-input-placeholder {
   color: transparent;
@@ -65,7 +62,7 @@ input:focus {
   outline: none;
 }
 
-button {
+.list button {
   margin-left: 2px;
   width: 36px;
   height: 36px;
@@ -75,24 +72,24 @@ button {
   color: rgb(197, 197, 197);
 }
 
-button:hover {
+.list button:hover {
   border: none;
   background-color: lightgray;
   color: rgb(136, 136, 136);
   transition: 0.2s;
 }
 
-h1 {
+h2 {
   text-align: left;
 }
 
 .delete {
   color: lightgray;
   padding: 0 10px;
-  cursor:pointer;
+  cursor: pointer;
 }
 
-.delete:hover{
+.delete:hover {
   color: rgb(56, 56, 56);
   transition: all 0.4s;
 }
@@ -100,4 +97,66 @@ h1 {
 .done {
   text-decoration: line-through;
   transition: all 0.5s;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.search input {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.user {
+  background-color: white;
+  border-radius: 8px;
+  width: 100%;
+  height: 106px;
+}
+
+.line {
+  margin: 0 20px 0 0;
+  width: 2px;
+  height: 85px;
+  background-color: #e4e4e4;
+}
+
+.user-information p {
+  font-size: 12px;
+  margin: 0;
+  padding: 3px 0;
+}
+
+.user-information span{
+  display: flex;
+}
+
+.user-information span p:nth-child(1){
+ margin-right: 15px;
+}
+h5 {
+  margin: 0;
+  font-weight: 600;
+}  
+.user {
+  margin: 0;
+  padding: 15px;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #e4e4e4;
+  margin: 5px 0;
+}
+
+
+.user-list {
+  padding: 15px;
 }

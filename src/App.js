@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEraser } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 
 function App() {
@@ -29,15 +30,15 @@ function App() {
     <div className="App">
       <Container>
         <Row>
-          <h1>ToDo</h1>
+          <h2>My Task</h2>
           <Col className="list" lg={8}>
-            <input onClick={(e) => {
+            <input className="add-task" onClick={(e) => {
               if (e.target.value) {
                 e.target.value.innerText = ""
               }
             }} onChange={(e) => {
               setText(e.target.value)
-            }} placeholder=" Add Task" />
+            }} placeholder=" add task" />
             <button onClick={(e) => {
               let template = {
                 taskContent: text,
@@ -58,8 +59,14 @@ function App() {
             </div>
           </Col>
           <Col className="number" lg={4}>
-            <div className="number-background phone-book">연락처</div>
-            <div className="number-background phone-save">폰저장</div>
+            <div className="number-background phone-book">
+              <div className="search"><input type="text" placeholder=" search user" /></div>
+              <div className="user-list"><Card /></div>
+
+            </div>
+            <div className="number-background phone-save">
+              폰저장
+            </div>
           </Col>
         </Row>
       </Container>
@@ -78,7 +85,7 @@ function Task({ task, setTask }) {
 
   return (
     <div className={`task start ${task.isComplete ? "done" : ""}`}>
-      <Form.Check  onClick={() => {
+      <Form.Check onClick={() => {
         let copy = [...todoList]
         if (!copy[index].isComplete) {
           copy[index].isComplete = true
@@ -94,6 +101,22 @@ function Task({ task, setTask }) {
         setTask([...todoList])
         localStorage.setItem('todoList', JSON.stringify(todoList));
       }} className="delete fa-lg" icon={faEraser} />
+    </div>
+  )
+}
+
+function Card() {
+  return (
+    <div className="user">
+      <h5>한지수 대리님</h5>
+      <div className="line"></div>
+      <div className="user-information">
+        <span>
+          <p><FontAwesomeIcon icon={faPhone} /> 01082112543</p>
+          <p><FontAwesomeIcon icon={faMapMarkerAlt} /> 아이픽스</p>
+        </span>
+        <p><FontAwesomeIcon icon={faEnvelope} /> llqrw55@naver.com</p>
+      </div>
     </div>
   )
 }
