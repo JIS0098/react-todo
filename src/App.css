@@ -21,7 +21,7 @@ p {
 }
 
 .number {
-  height: 550px;
+  height: 830px;
 }
 
 .task-check {
@@ -36,6 +36,8 @@ p {
 
 .phone-book {
   height: 100%;
+  padding: 15px;
+  padding-top: 22.5px;
 }
 
 .list input {
@@ -95,12 +97,16 @@ h2 {
   transition: all 0.5s;
 }
 
+.phone-book-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .search {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 15px;
-  padding-top: 18px;
+  align-items: center
 }
 
 .search input {
@@ -155,8 +161,7 @@ h5 {
 }
 
 .user-list {
-  padding: 15px;
-  padding-top: 10px;
+  margin-top: 20px;
 }
 
 .user-menu{
@@ -175,6 +180,8 @@ h5 {
 .save >*{
   margin-bottom: 8px;
 }
+
+
 
 .save div input{
   width: 100%;

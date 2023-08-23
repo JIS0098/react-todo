@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEraser } from "@fortawesome/free-solid-svg-icons";
-import { faPhone, faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faEnvelope, faMapMarkerAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 
 function App() {
@@ -60,6 +60,10 @@ function App() {
           </Col>
           <Col className="number" lg={4}>
             <div className="phone-book">
+              <div  className="phone-book-header">
+                <h3>연락처</h3>
+                <FontAwesomeIcon icon={faPlus}  className="fa-xl"/>
+              </div>
               <div className="search">
                 <input type="text" placeholder=" search user" />
               </div>
@@ -71,10 +75,11 @@ function App() {
                 <Card />
                 <Card />
                 <Card />
+                <Card />
               </div>
 
             </div>
-            <div className="phone-save">
+            {/* <div className="phone-save">
               <div className="save">
                 <div>
                   <div>이름</div>
@@ -97,7 +102,7 @@ function App() {
                   <button>닫기</button>
                 </div>
               </div>
-            </div>
+            </div> */}
           </Col>
         </Row>
       </Container>
