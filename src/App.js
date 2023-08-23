@@ -9,13 +9,37 @@ import { faPhone, faEnvelope, faMapMarkerAlt, faPlus } from "@fortawesome/free-s
 
 
 function App() {
+  var newID = function () {return Math.random().toString(36).substr(2, 16);}
   let [text, setText] = useState('')
   let [task, setTask] = useState([])
   let [save ,setSave] = useState(false)
-  let [user ,setUser] = useState([])
-  var newID = function () {
-    return Math.random().toString(36).substr(2, 16);
-  }
+  let [inputs, setInputs] = useState({
+    name: '', 
+    tel: '',
+    email:'',
+    company:'',
+  });
+
+  let { name, tel, email, company } = inputs; 
+  
+  let onChange=(e)=>{
+    let {name, value}=e.target;
+    let nextInputs={
+      ...inputs,
+      [name]: value,
+    }
+    setInputs(nextInputs);
+    };
+  
+    const onReset = () => {
+      setInputs({
+        name: '',
+        tel: '',
+        email:'',
+        company:'',
+      });
+    };
+
 
 
   useEffect(() => {
@@ -88,24 +112,22 @@ function App() {
               <div className="save">
                 <div>
                   <div>이름</div>
-                  <input type="text" placeholder="*이름을 입력해주세요." />
+                  <input  onChange={onChange} defaultValue={name}  type="text" placeholder="*이름을 입력해주세요." />
                 </div>
                 <div>
                   <div>번호</div>
-                  <input type="number" placeholder="*번호를 입력해주세요." />
+                  <input onChange={onChange} defaultValue={tel} type="number" placeholder="*번호를 입력해주세요." />
                 </div>
                 <div>
                   <div>email</div>
-                  <input type="email" placeholder="메일을 입력해주세요." />
+                  <input onChange={onChange} defaultValue={email} type="email" placeholder="메일을 입력해주세요." />
                 </div>
                 <div>
                   <div>소속</div>
-                  <input type="text" placeholder="소속을 입력해주세요." />
+                  <input onChange={onChange} defaultValue={company} type="text" placeholder="소속을 입력해주세요." />
                 </div>
                 <div className="save-but">
-                  <button onClick={()=>{
-              
-                  }}>저장</button>
+                  <button onClick={onReset}>저장</button>
                   <button onClick={()=>{
                     setSave(false);
                   }}>닫기</button>
@@ -152,6 +174,8 @@ function Task({ task, setTask }) {
   )
 }
 
+
+
 function Card() {
   return (
     <div className="user">
@@ -167,5 +191,7 @@ function Card() {
     </div>
   )
 }
+
+
 
 export default App;
