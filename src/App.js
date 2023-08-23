@@ -59,13 +59,44 @@ function App() {
             </div>
           </Col>
           <Col className="number" lg={4}>
-            <div className="number-background phone-book">
-              <div className="search"><input type="text" placeholder=" search user" /></div>
-              <div className="user-list"><Card /></div>
+            <div className="phone-book">
+              <div className="search">
+                <input type="text" placeholder=" search user" />
+              </div>
+              <div className="user-list">
+                <div className="user-menu">
+                  <div >전체(0)</div>
+                  <div>즐겨찾기(5)</div>
+                </div>
+                <Card />
+                <Card />
+                <Card />
+              </div>
 
             </div>
-            <div className="number-background phone-save">
-              폰저장
+            <div className="phone-save">
+              <div className="save">
+                <div>
+                  <div>이름</div>
+                  <input type="text" placeholder="*이름을 입력해주세요." />
+                </div>
+                <div>
+                  <div>번호</div>
+                  <input type="number" placeholder="*번호를 입력해주세요." />
+                </div>
+                <div>
+                  <div>email</div>
+                  <input type="email" placeholder="메일을 입력해주세요." />
+                </div>
+                <div>
+                  <div>소속</div>
+                  <input type="text" placeholder="소속을 입력해주세요." />
+                </div>
+                <div className="save-but">
+                  <button>저장</button>
+                  <button>닫기</button>
+                </div>
+              </div>
             </div>
           </Col>
         </Row>
