@@ -12,6 +12,7 @@ function App() {
   let [text, setText] = useState('')
   let [task, setTask] = useState([])
   let [save ,setSave] = useState(false)
+  let [user ,setUser] = useState([])
   var newID = function () {
     return Math.random().toString(36).substr(2, 16);
   }
@@ -102,7 +103,9 @@ function App() {
                   <input type="text" placeholder="소속을 입력해주세요." />
                 </div>
                 <div className="save-but">
-                  <button>저장</button>
+                  <button onClick={()=>{
+              
+                  }}>저장</button>
                   <button onClick={()=>{
                     setSave(false);
                   }}>닫기</button>
