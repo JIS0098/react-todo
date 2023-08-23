@@ -11,6 +11,7 @@ import { faPhone, faEnvelope, faMapMarkerAlt, faPlus } from "@fortawesome/free-s
 function App() {
   let [text, setText] = useState('')
   let [task, setTask] = useState([])
+  let [save ,setSave] = useState(false)
   var newID = function () {
     return Math.random().toString(36).substr(2, 16);
   }
@@ -62,7 +63,9 @@ function App() {
             <div className="phone-book">
               <div  className="phone-book-header">
                 <h3>연락처</h3>
-                <FontAwesomeIcon icon={faPlus}  className="fa-xl"/>
+                <FontAwesomeIcon onClick={()=>{
+                  setSave(true);
+                }} icon={faPlus}  className="fa-xl"/>
               </div>
               <div className="search">
                 <input type="text" placeholder=" search user" />
@@ -77,9 +80,10 @@ function App() {
                 <Card />
                 <Card />
               </div>
-
             </div>
-            {/* <div className="phone-save">
+            {
+              save?
+            <div className="phone-save">
               <div className="save">
                 <div>
                   <div>이름</div>
@@ -99,10 +103,14 @@ function App() {
                 </div>
                 <div className="save-but">
                   <button>저장</button>
-                  <button>닫기</button>
+                  <button onClick={()=>{
+                    setSave(false);
+                  }}>닫기</button>
                 </div>
               </div>
-            </div> */}
+            </div>
+            :""
+            }
           </Col>
         </Row>
       </Container>
