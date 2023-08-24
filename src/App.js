@@ -21,6 +21,8 @@ function App() {
     company: '',
     favorite:false
   });
+  let [favorite, setFavorite] =useState(false);
+
 
   let { name, tel, email, company } = inputs;
 
@@ -113,18 +115,23 @@ function App() {
               </div>
               <div className="user-list">
                 <div className="user-menu">
-                  <div >전체({userList.length})</div>
-                  <div>즐겨찾기(5)</div>
+                  <div onClick={()=>{
+                    setFavorite(false)
+                  }} >전체({userList.length})</div>
+                  <div onClick={()=>{
+                   setFavorite(true);
+                  }}>즐겨찾기</div>
                 </div>
-                {
+                { //즐겨찾기가 거짓이라면 원래 유저 리스트를
+                  // 즐겨찾기가 진실이라면 즐겨찾기 유저리스트를
+                  favorite===false?
                   userList.map((a)=>{
                     return(
-                      <Card user={a} setUserList={setUserList}/>
+                      <Card user={a}  setUserList={setUserList}/>
                     )
                   })
-
-                }
-
+                  :""
+                  }
               </div>
             </div>
             {
@@ -173,13 +180,14 @@ function Task({ task, setTask }) {
     return a.id === task.id
   })
 
+
+
   return (
     <div className={`task start ${task.isComplete ? "done" : ""}`}>
       <Form.Check onClick={() => {
         let copy = [...todoList]
         copy[index].isComplete == false?
-          copy[index].isComplete = true:copy[index].isComplete = false
-
+        copy[index].isComplete = true:copy[index].isComplete = false
         setTask([...copy])
         localStorage.setItem('todoList', JSON.stringify(copy));
       }} className="task-check" />
@@ -195,11 +203,12 @@ function Task({ task, setTask }) {
 
 
 
-function Card({user,setUserList}) {
+function Card({user,setUserList,favoriteList,setFavoriteList}) {
   let userList = JSON.parse(localStorage.getItem('userList'))
   let index = userList.findIndex((a) => {
     return a.tel == user.tel
   })
+useEffect(()=>{},[favoriteList])
 
   return (
     <div className="user">
@@ -211,6 +220,9 @@ function Card({user,setUserList}) {
         copy[index].favorite=true:copy[index].favorite=false
         setUserList(copy)
         localStorage.setItem('userList', JSON.stringify(copy));
+        let 즐찾 = copy.filter((a)=>{
+          return a.favorite ===true
+        })
       }} icon={faHeart} className={`heart ${user.favorite ? "favorite" : ""}`}/>
       </div>
       <div className="line"></div>
