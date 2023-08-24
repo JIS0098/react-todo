@@ -180,8 +180,12 @@ h5 {
 
 .user-list {
   margin-top: 20px;
-}
 
+}
+.card-list{
+  overflow-y: scroll;
+  height: 650px;
+}
 .user-menu {
   display: flex;
   justify-content: left;

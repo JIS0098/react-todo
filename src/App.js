@@ -126,6 +126,7 @@ function App() {
                    setFavorite(true);
                   }}>즐겨찾기({count})</div>
                 </div>
+                <div className="card-list">
                 { 
                   favorite===false?
                   userList.map((a)=>{
@@ -141,6 +142,8 @@ function App() {
                     )                    
                   })
                   }
+                </div>
+                
               </div>
             </div>
                 <div className={`phone-save ${saveOn? 'down':''}`}>
