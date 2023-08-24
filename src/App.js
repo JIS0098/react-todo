@@ -9,36 +9,41 @@ import { faPhone, faEnvelope, faMapMarkerAlt, faPlus } from "@fortawesome/free-s
 
 
 function App() {
-  var newID = function () {return Math.random().toString(36).substr(2, 16);}
+  var newID = function () { return Math.random().toString(36).substr(2, 16); }
   let [text, setText] = useState('')
   let [task, setTask] = useState([])
-  let [save ,setSave] = useState(false)
+  let [save, setSave] = useState(false)
+  let [userList, setUserList] = useState([])
   let [inputs, setInputs] = useState({
-    name: '', 
+    name: '',
     tel: '',
-    email:'',
-    company:'',
+    email: '',
+    company: '',
   });
 
-  let { name, tel, email, company } = inputs; 
-  
-  let onChange=(e)=>{
-    let {name, value}=e.target;
-    let nextInputs={
+  let { name, tel, email, company } = inputs;
+
+  let onChange = (e) => {
+    let { name, value } = e.target;
+    setInputs({
       ...inputs,
       [name]: value,
-    }
-    setInputs(nextInputs);
-    };
-  
-    const onReset = () => {
-      setInputs({
-        name: '',
-        tel: '',
-        email:'',
-        company:'',
-      });
-    };
+    });
+
+  };
+
+  const onReset = () => {
+    setUserList(inputs)
+    let userList = JSON.parse(localStorage.getItem('userList'))
+    userList.push(inputs)
+    localStorage.setItem('userList', JSON.stringify(userList));
+    setInputs({
+      name: '',
+      tel: '',
+      email: '',
+      company: '',
+    });
+  };
 
 
 
@@ -47,8 +52,13 @@ function App() {
       localStorage.setItem('todoList', JSON.stringify([]))
     }
 
+    if (!localStorage.getItem("userList")) {
+      localStorage.setItem('userList', JSON.stringify([]))
+    }
+
     let todoList = JSON.parse(localStorage.getItem('todoList'))
     setTask([...todoList])
+
 
   }, [])
 
@@ -86,11 +96,11 @@ function App() {
           </Col>
           <Col className="number" lg={4}>
             <div className="phone-book">
-              <div  className="phone-book-header">
+              <div className="phone-book-header">
                 <h3>연락처</h3>
-                <FontAwesomeIcon onClick={()=>{
+                <FontAwesomeIcon onClick={() => {
                   setSave(true);
-                }} icon={faPlus}  className="fa-xl"/>
+                }} icon={faPlus} className="fa-xl" />
               </div>
               <div className="search">
                 <input type="text" placeholder=" search user" />
@@ -107,34 +117,34 @@ function App() {
               </div>
             </div>
             {
-              save?
-            <div className="phone-save">
-              <div className="save">
-                <div>
-                  <div>이름</div>
-                  <input  onChange={onChange} defaultValue={name}  type="text" placeholder="*이름을 입력해주세요." />
+              save ?
+                <div className="phone-save">
+                  <div className="save">
+                    <div>
+                      <div>이름</div>
+                      <input name="name" onChange={onChange} value={name} type="text" placeholder="*이름을 입력해주세요." />
+                    </div>
+                    <div>
+                      <div>번호</div>
+                      <input name="tel" onChange={onChange} value={tel} type="number" placeholder="*번호를 입력해주세요." />
+                    </div>
+                    <div>
+                      <div>email</div>
+                      <input name="email" onChange={onChange} value={email} type="email" placeholder="메일을 입력해주세요." />
+                    </div>
+                    <div>
+                      <div>소속</div>
+                      <input name="company" onChange={onChange} value={company} type="text" placeholder="소속을 입력해주세요." />
+                    </div>
+                    <div className="save-but">
+                      <button onClick={onReset}>저장</button>
+                      <button onClick={() => {
+                        setSave(false);
+                      }}>닫기</button>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div>번호</div>
-                  <input onChange={onChange} defaultValue={tel} type="number" placeholder="*번호를 입력해주세요." />
-                </div>
-                <div>
-                  <div>email</div>
-                  <input onChange={onChange} defaultValue={email} type="email" placeholder="메일을 입력해주세요." />
-                </div>
-                <div>
-                  <div>소속</div>
-                  <input onChange={onChange} defaultValue={company} type="text" placeholder="소속을 입력해주세요." />
-                </div>
-                <div className="save-but">
-                  <button onClick={onReset}>저장</button>
-                  <button onClick={()=>{
-                    setSave(false);
-                  }}>닫기</button>
-                </div>
-              </div>
-            </div>
-            :""
+                : ""
             }
           </Col>
         </Row>
