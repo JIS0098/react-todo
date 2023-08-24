@@ -22,8 +22,7 @@ function App() {
     favorite:false
   });
   let [favorite, setFavorite] =useState(false);
-
-
+  let [saveOn, setSaveOn] =useState(false)
   let { name, tel, email, company } = inputs;
 
   let onChange = (e) => {
@@ -34,6 +33,10 @@ function App() {
     });
 
   };
+    let count = 0
+    userList.map((a)=>{
+    if(a.favorite){count++}
+  })
 
   const onReset = () => {
     setUserList(inputs)
@@ -108,6 +111,7 @@ function App() {
                 <h3>연락처</h3>
                 <FontAwesomeIcon onClick={() => {
                   setSave(true);
+                  setSaveOn(true)
                 }} icon={faPlus} className="fa-xl" />
               </div>
               <div className="search">
@@ -120,10 +124,9 @@ function App() {
                   }} >전체({userList.length})</div>
                   <div onClick={()=>{
                    setFavorite(true);
-                  }}>즐겨찾기</div>
+                  }}>즐겨찾기({count})</div>
                 </div>
-                { //즐겨찾기가 거짓이라면 원래 유저 리스트를
-                  // 즐겨찾기가 진실이라면 즐겨찾기 유저리스트를
+                { 
                   favorite===false?
                   userList.map((a)=>{
                     return(
@@ -140,9 +143,7 @@ function App() {
                   }
               </div>
             </div>
-            {
-              save ?
-                <div className="phone-save">
+                <div className={`phone-save ${saveOn? 'down':''}`}>
                   <div className="save">
                     <div>
                       <div>이름</div>
@@ -161,15 +162,17 @@ function App() {
                       <input name="company" onChange={onChange} value={company} type="text" placeholder="소속을 입력해주세요." />
                     </div>
                     <div className="save-but">
-                      <button onClick={onReset}>저장</button>
+                      <button onClick={()=>{
+                        setSaveOn(false);
+                        onReset();
+                      }}>저장</button>
                       <button onClick={() => {
                         setSave(false);
+                        setSaveOn(false);
                       }}>닫기</button>
                     </div>
                   </div>
                 </div>
-                : ""
-            }
           </Col>
         </Row>
       </Container>
