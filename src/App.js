@@ -135,9 +135,7 @@ function App() {
                      a.favorite?
                       <Card user={a}  setUserList={setUserList}/>
                       :""
-                    )
-
-                    
+                    )                    
                   })
                   }
               </div>
