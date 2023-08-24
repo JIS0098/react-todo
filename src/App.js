@@ -4,8 +4,8 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEraser } from "@fortawesome/free-solid-svg-icons";
-import { faPhone, faEnvelope, faMapMarkerAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faEraser, faL } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faEnvelope, faMapMarkerAlt, faPlus ,faHeart } from "@fortawesome/free-solid-svg-icons";
 
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
     tel: '',
     email: '',
     company: '',
+    favorite:false
   });
 
   let { name, tel, email, company } = inputs;
@@ -35,14 +36,17 @@ function App() {
   const onReset = () => {
     setUserList(inputs)
     let userList = JSON.parse(localStorage.getItem('userList'))
-    userList.push(inputs)
-    localStorage.setItem('userList', JSON.stringify(userList));
+    let copy = [...userList]
+    copy.push(inputs)
+    setUserList([...copy])
+    localStorage.setItem('userList', JSON.stringify(copy));
     setInputs({
       name: '',
       tel: '',
       email: '',
       company: '',
     });
+    console.log(userList)
   };
 
 
@@ -58,6 +62,8 @@ function App() {
 
     let todoList = JSON.parse(localStorage.getItem('todoList'))
     setTask([...todoList])
+    let userList = JSON.parse(localStorage.getItem('userList'))
+    setUserList([...userList])
 
 
   }, [])
@@ -107,13 +113,18 @@ function App() {
               </div>
               <div className="user-list">
                 <div className="user-menu">
-                  <div >전체(0)</div>
+                  <div >전체({userList.length})</div>
                   <div>즐겨찾기(5)</div>
                 </div>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {
+                  userList.map((a)=>{
+                    return(
+                      <Card user={a} setUserList={setUserList}/>
+                    )
+                  })
+
+                }
+
               </div>
             </div>
             {
@@ -166,11 +177,9 @@ function Task({ task, setTask }) {
     <div className={`task start ${task.isComplete ? "done" : ""}`}>
       <Form.Check onClick={() => {
         let copy = [...todoList]
-        if (!copy[index].isComplete) {
-          copy[index].isComplete = true
-        } else {
-          copy[index].isComplete = false
-        }
+        copy[index].isComplete == false?
+          copy[index].isComplete = true:copy[index].isComplete = false
+
         setTask([...copy])
         localStorage.setItem('todoList', JSON.stringify(copy));
       }} className="task-check" />
@@ -186,17 +195,31 @@ function Task({ task, setTask }) {
 
 
 
-function Card() {
+function Card({user,setUserList}) {
+  let userList = JSON.parse(localStorage.getItem('userList'))
+  let index = userList.findIndex((a) => {
+    return a.tel == user.tel
+  })
+
   return (
     <div className="user">
-      <h5>한지수 대리님</h5>
+      <div className="user-header">
+      <h5>{user.name}</h5>
+      <FontAwesomeIcon onClick={()=>{
+        let copy = [...userList]
+        copy[index].favorite ==false?
+        copy[index].favorite=true:copy[index].favorite=false
+        setUserList(copy)
+        localStorage.setItem('userList', JSON.stringify(copy));
+      }} icon={faHeart} className={`heart ${user.favorite ? "favorite" : ""}`}/>
+      </div>
       <div className="line"></div>
       <div className="user-information">
         <span>
-          <p><FontAwesomeIcon icon={faPhone} /> 01082112543</p>
-          <p><FontAwesomeIcon icon={faMapMarkerAlt} /> 아이픽스</p>
+          <p><FontAwesomeIcon icon={faPhone} /> {user.tel}</p>
+          <p><FontAwesomeIcon icon={faMapMarkerAlt} /> {user.company}</p>
         </span>
-        <p><FontAwesomeIcon icon={faEnvelope} /> llqrw55@naver.com</p>
+        <p><FontAwesomeIcon icon={faEnvelope} /> {user.email}</p>
       </div>
     </div>
   )
