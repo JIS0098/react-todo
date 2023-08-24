@@ -130,7 +130,15 @@ function App() {
                       <Card user={a}  setUserList={setUserList}/>
                     )
                   })
-                  :""
+                  : userList.map((a)=>{
+                    return(
+                     a.favorite?
+                      <Card user={a}  setUserList={setUserList}/>
+                      :""
+                    )
+
+                    
+                  })
                   }
               </div>
             </div>
@@ -203,13 +211,11 @@ function Task({ task, setTask }) {
 
 
 
-function Card({user,setUserList,favoriteList,setFavoriteList}) {
+function Card({user,setUserList}) {
   let userList = JSON.parse(localStorage.getItem('userList'))
   let index = userList.findIndex((a) => {
     return a.tel == user.tel
   })
-useEffect(()=>{},[favoriteList])
-
   return (
     <div className="user">
       <div className="user-header">
