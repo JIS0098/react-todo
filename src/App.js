@@ -224,9 +224,6 @@ function Card({user,setUserList}) {
         copy[index].favorite=true:copy[index].favorite=false
         setUserList(copy)
         localStorage.setItem('userList', JSON.stringify(copy));
-        let 즐찾 = copy.filter((a)=>{
-          return a.favorite ===true
-        })
       }} icon={faHeart} className={`heart ${user.favorite ? "favorite" : ""}`}/>
       </div>
       <div className="line"></div>
