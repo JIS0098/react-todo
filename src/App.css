@@ -325,6 +325,10 @@ h5 {
   box-sizing: border-box;
 }
 
+.important h3{
+  padding-left: 7px;
+}
+
 .important-list{
   display: flex;
   align-items: center;
