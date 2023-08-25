@@ -2,25 +2,72 @@
   padding-top: 30px;
 }
 
+
+.all-screen {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 20px ;
+}
+.all-screen >*{
+  padding: 15px
+}
+.task-main {
+  height: 830px;
+}
+
 .task {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3px;
-  width: 90%;
+  width: 100%;
   border-bottom: 1px solid rgb(233, 233, 233);
 }
 
 .task>* {
   margin: 0;
-  padding: 7px;
+  padding: 10px;
+}
+
+.task-important {
+  width: 100%;
+  height: 35%;
+  background-color: #e4e4e4;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.task-board {
+  width: 100%;
+  height: 65%;
+  padding: 15px;
+  background-color: #e4e4e4;
+  border-radius: 8px;
+  padding-top: 22.5px;
+
+}
+
+.task-list {
+  padding: 0 15px;
+  background-color: white;
+  border-radius: 8px;
+  height: 80%;
+}
+
+.task-add {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 p {
   font-size: 14px;
 }
 
-.number {
+
+.phone-main {
   height: 830px;
 }
 
@@ -28,36 +75,32 @@ p {
   margin-right: 20px;
 }
 
-.phone-book{
+.phone-book {
   background-color: #e4e4e4;
   border-radius: 10px;
-  margin-top: 10px;
-}
-
-.phone-book {
-  height: 100%;
   padding: 15px;
   padding-top: 22.5px;
 }
 
-.phone-save{
-  height:90%;
-  position:relative;
-  top: -767px;
-  background-color:  #e4e4e4;
+.phone-save {
+  height: 93%;
+  position: relative;
+  top: -755px;
+  background-color: #e4e4e4;
   border-radius: 10px;
   transform: scale(0);
   transition: all 0.25s;
+  opacity: 0;
 }
 
-.down{
-  opacity: 1;  
+.down {
+  opacity: 1;
   transform: scale(1);
   transition: all 0.25s;
 }
 
-.list input {
-  width: 70%;
+.task-main input {
+  width: 95%;
   padding: 5px;
   border: 1px solid rgb(228, 228, 228);
   border-radius: 5px;
@@ -76,7 +119,7 @@ input:focus {
   outline: none;
 }
 
-.list button {
+.task-main button {
   margin-left: 2px;
   width: 36px;
   height: 36px;
@@ -86,10 +129,10 @@ input:focus {
   color: rgb(197, 197, 197);
 }
 
-.list button:hover {
+.task-main button:hover {
   border: none;
-  background-color: lightgray;
-  color: rgb(136, 136, 136);
+  background-color: #be79e1;
+  color: rgb(255, 255, 255);
   transition: 0.2s;
 }
 
@@ -103,7 +146,8 @@ h2 {
   cursor: pointer;
 }
 
-.delete:hover {
+.delete:hover,
+.user-delete:hover {
   color: rgb(56, 56, 56);
   transition: all 0.4s;
 }
@@ -182,10 +226,31 @@ h5 {
   margin-top: 20px;
 
 }
-.card-list{
+
+.card-list {
   overflow-y: scroll;
   height: 650px;
 }
+
+.card-list::-webkit-scrollbar {
+  width: 8px;
+  /* 스크롤바의 너비 */
+}
+
+.card-list::-webkit-scrollbar-thumb {
+  height: 30%;
+  /* 스크롤바의 길이 */
+  background: rgb(138, 138, 138);
+  /* 스크롤바의 색상 */
+  border-radius: 10px;
+
+}
+
+.card-list::-webkit-scrollbar-track {
+  background: rgba(138, 138, 138, 0.1);
+  /*스크롤바 뒷 배경 색상*/
+}
+
 .user-menu {
   display: flex;
   justify-content: left;
@@ -203,8 +268,6 @@ h5 {
 .save>* {
   margin-bottom: 8px;
 }
-
-
 
 .save div input {
   width: 100%;
@@ -236,16 +299,19 @@ h5 {
 }
 
 .heart {
-  padding-right: 5px;
+  padding-right: 7px;
   font-size: 18px;
   color: #e4e4e4;
   transition: all 0.2s;
 
 }
-.favorite{
-  color:purple;
+
+.favorite {
+  color: #be79e1;
   transition: all 0.4s;
 }
 
-
-
+.user-delete {
+  font-size: 19px;
+  color: #e4e4e4;
+}
