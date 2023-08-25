@@ -1,5 +1,5 @@
 .App {
-  padding-top: 30px;
+  padding-top: 25px;
 }
 
 
@@ -30,14 +30,7 @@
   padding: 10px;
 }
 
-.task-important {
-  width: 100%;
-  height: 34.5%;
-  background-color: #e4e4e4;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-}
+
 
 .task-board {
   width: 100%;
@@ -80,6 +73,7 @@ p {
 
 
 .phone-book {
+  width: 100;
   background-color: #e4e4e4;
   border-radius: 10px;
   padding: 15px 12.5px 15px 15px;
@@ -132,13 +126,6 @@ input:focus {
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
   color: rgb(197, 197, 197);
-}
-
-.task-main button:hover {
-  border: none;
-  background-color: #be79e1;
-  color: rgb(255, 255, 255);
-  transition: 0.2s;
 }
 
 h2 {
@@ -312,6 +299,7 @@ h5 {
   transition: all 0.2s;
 }
 
+.important-task-check:hover,
 .heart:hover{
   color: #be79e1;
   transition: all 0.4s;
@@ -325,4 +313,46 @@ h5 {
 .user-delete {
   font-size: 19px;
   color: #e4e4e4;
+}
+
+.important {
+  width: 100%;
+  height: 34.5%;
+  padding: 22.5px 10px 15px 10px;
+  background-color: #e4e4e4;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.important-list{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 83%;
+  border-radius: 8px;
+}
+
+.important-task{
+  width: 100%;
+  height: 95%;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0 10px;
+}
+.important-task h6{
+  text-align: center;
+  font-weight: 600;
+}
+.important-task-check{
+  font-size: 25px;
+  color: #e4e4e4;
+}
+.important-task-delete{
+  position: relative;
+  left: 108px;
 }

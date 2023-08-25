@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEraser, faL, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { faPhone, faEnvelope, faMapMarkerAlt, faPlus, faHeart, faTimesCircle,faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faEnvelope, faMapMarkerAlt, faPlus, faHeart, faTimesCircle, faCheck,faXmark,faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   var newID = function () { return Math.random().toString(36).substr(2, 16); }
@@ -75,16 +75,33 @@ function App() {
   return (
     <div className="App">
       <Container className="all">
-        <Row className="all-screen">
-          <Col className="day-main" lg={2}>
-            <h1>2023.01.25</h1>
-          </Col>
-          <Col className="task-main" lg={7}>
-            <div className="task-important">
-
+        <Row className="day-main">
+          <h1>2023.01.25</h1>
+        </Row>
+        <Row className="all-screen" >
+          <Col className="task-main" xl={8}>
+            <div className="important">
+              <h3>중요 목록</h3>
+              <div className="important-list">
+                <div className="important-task">
+                  <FontAwesomeIcon icon={faXmark} className="important-task-delete"/>
+                  <h6>한지수 대리님 전화드리기zzzzzzzzzzzzzzz</h6>
+                  <FontAwesomeIcon icon={faCheckCircle} className="important-task-check"/>
+                </div>
+                <div className="important-task">
+                  <FontAwesomeIcon icon={faXmark} className="important-task-delete"/>
+                  <h6></h6>
+                  <FontAwesomeIcon icon={faCheckCircle} className="important-task-check"/>
+                </div>
+                <div className="important-task">
+                  <FontAwesomeIcon icon={faXmark} className="important-task-delete"/>
+                  <h6></h6>
+                  <FontAwesomeIcon icon={faCheckCircle} className="important-task-check"/>
+                </div>
+              </div>
             </div>
             <div className="task-board">
-                <h2>오늘의 할일</h2>
+              <h3>작업 목록</h3>
               <div className="task-add">
                 <input onClick={(e) => {
                   if (e.target.value) {
@@ -114,7 +131,7 @@ function App() {
               </div>
             </div>
           </Col>
-          <Col className="phone-main" lg={3}>
+          <Col className="phone-main" xl={4}>
             <div className="phone-book">
               <div className="phone-book-header">
                 <h3>연락처</h3>
@@ -208,7 +225,7 @@ function Task({ task, setTask }) {
           copy[index].isComplete = true : copy[index].isComplete = false
         setTask([...copy])
         localStorage.setItem('todoList', JSON.stringify(copy));
-      }}/>
+      }} />
       <p>{task.taskContent}</p>
       <FontAwesomeIcon onClick={() => {
         todoList.splice(index, 1)
