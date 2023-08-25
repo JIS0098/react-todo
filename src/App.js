@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEraser, faL, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { faPhone, faEnvelope, faMapMarkerAlt, faPlus, faHeart, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faEnvelope, faMapMarkerAlt, faPlus, faHeart, faTimesCircle,faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   var newID = function () { return Math.random().toString(36).substr(2, 16); }
@@ -84,7 +84,7 @@ function App() {
 
             </div>
             <div className="task-board">
-              <h2>오늘의 할일</h2>
+                <h2>오늘의 할일</h2>
               <div className="task-add">
                 <input onClick={(e) => {
                   if (e.target.value) {
@@ -202,13 +202,13 @@ function Task({ task, setTask }) {
 
   return (
     <div className={`task start ${task.isComplete ? "done" : ""}`}>
-      <Form.Check onClick={() => {
+      <FontAwesomeIcon className="check" icon={faCheck} onClick={() => {
         let copy = [...todoList]
         copy[index].isComplete == false ?
           copy[index].isComplete = true : copy[index].isComplete = false
         setTask([...copy])
         localStorage.setItem('todoList', JSON.stringify(copy));
-      }} className="task-check" />
+      }}/>
       <p>{task.taskContent}</p>
       <FontAwesomeIcon onClick={() => {
         todoList.splice(index, 1)
