@@ -88,9 +88,6 @@ function App() {
           <Col className="task-main" xl={8}>
             <div className="important">
               <h3>중요 목록</h3>
-              {
-
-              }
               <div className="important-list" onDragOver={(e) => { e.preventDefault(); }}
                 onDrop={(e) => {
                   let index=e.dataTransfer.getData("index")
@@ -156,12 +153,8 @@ function App() {
               </div>
               <div className="user-list">
                 <div className="user-menu">
-                  <div onClick={() => {
-                    setFavorite(false)
-                  }} >전체({userList.length})</div>
-                  <div onClick={() => {
-                    setFavorite(true);
-                  }}>즐겨찾기({count})</div>
+                  <div onClick={() => {setFavorite(false)}} >전체({userList.length})</div>
+                  <div onClick={() => {setFavorite(true)}}>즐겨찾기({count})</div>
                 </div>
                 <div className="card-list">
                   {
