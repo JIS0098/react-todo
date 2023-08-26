@@ -2,10 +2,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { useEffect, useState } from "react";
-import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEraser, faL, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { faPhone, faEnvelope, faMapMarkerAlt, faPlus, faHeart, faTimesCircle, faCheck,faXmark,faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faEraser, faPhone, faEnvelope, faMapMarkerAlt, faPlus, faHeart, faTimesCircle, faCheck, faXmark, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   var newID = function () { return Math.random().toString(36).substr(2, 16); }
@@ -21,7 +19,8 @@ function App() {
     favorite: false
   });
   let [favorite, setFavorite] = useState(false);
-  let [saveOn, setSaveOn] = useState(false)
+  let [saveOn, setSaveOn] = useState(false);
+  let [importantList,setImportantList]=useState([])
   let { name, tel, email, company } = inputs;
 
   let onChange = (e) => {
@@ -63,11 +62,18 @@ function App() {
     if (!localStorage.getItem("userList")) {
       localStorage.setItem('userList', JSON.stringify([]))
     }
+    if (!localStorage.getItem("importantList")) {
+      localStorage.setItem('importantList', JSON.stringify([]))
+    }
+
+    
 
     let todoList = JSON.parse(localStorage.getItem('todoList'))
     setTask([...todoList])
     let userList = JSON.parse(localStorage.getItem('userList'))
     setUserList([...userList])
+    let importantList =JSON.parse(localStorage.getItem('importantList'))
+    setImportantList([...importantList])
 
 
   }, [])
@@ -82,22 +88,28 @@ function App() {
           <Col className="task-main" xl={8}>
             <div className="important">
               <h3>중요 목록</h3>
-              <div className="important-list">
-                <div className="important-task">
-                  <FontAwesomeIcon icon={faXmark} className="important-task-delete"/>
-                  <h6>한지수 대리님 전화드리기zzzzzzzzzzzzzzz</h6>
-                  <FontAwesomeIcon icon={faCheckCircle} className="important-task-check"/>
-                </div>
-                <div className="important-task">
-                  <FontAwesomeIcon icon={faXmark} className="important-task-delete"/>
-                  <h6></h6>
-                  <FontAwesomeIcon icon={faCheckCircle} className="important-task-check"/>
-                </div>
-                <div className="important-task">
-                  <FontAwesomeIcon icon={faXmark} className="important-task-delete"/>
-                  <h6></h6>
-                  <FontAwesomeIcon icon={faCheckCircle} className="important-task-check"/>
-                </div>
+              {
+
+              }
+              <div className="important-list" onDragOver={(e) => { e.preventDefault(); }}
+                onDrop={(e) => {
+                  let index=e.dataTransfer.getData("index")
+                  e.preventDefault();
+                  let copy = [...importantList]
+                  if(copy.length<3){
+                    copy.push(task[index])
+                    localStorage.setItem('importantList',JSON.stringify(copy))
+                    setImportantList(copy);
+                  }else{
+                    alert("중요 목록은 최대 3개입니다")
+                  }
+                }} >{
+        
+                  importantList.map((a)=>{
+                    return <ImportantTask task={a} />
+                  })
+
+                }
               </div>
             </div>
             <div className="task-board">
@@ -209,7 +221,15 @@ function App() {
   );
 }
 
-
+function ImportantTask({task}) {
+  return (
+    <div className="important-task">
+      <FontAwesomeIcon icon={faXmark} className="important-task-delete" />
+      <h6>{task.taskContent}</h6>
+      <FontAwesomeIcon icon={faCheckCircle} className="important-task-check" />
+    </div>
+  )
+}
 
 function Task({ task, setTask }) {
   let todoList = JSON.parse(localStorage.getItem('todoList'))
@@ -217,8 +237,14 @@ function Task({ task, setTask }) {
     return a.id === task.id
   })
 
+
   return (
-    <div className={`task start ${task.isComplete ? "done" : ""}`}>
+    <div id={task.id} draggable="true" onDragStart={(e) => {
+      let index = todoList.findIndex((a)=>{
+        return a.id==e.target.id
+      })
+      e.dataTransfer.setData("index",index)
+    }} className={`task start ${task.isComplete ? "done" : ""}`}>
       <FontAwesomeIcon className="check" icon={faCheck} onClick={() => {
         let copy = [...todoList]
         copy[index].isComplete == false ?
