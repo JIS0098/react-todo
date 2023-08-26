@@ -160,8 +160,7 @@ function App() {
                       : userList.map((a) => {
                         return (
                           a.favorite ?
-                            <Card user={a} setUserList={setUserList} />
-                            : ""
+                            <Card user={a} setUserList={setUserList} /> : ""
                         )
                       })
                   }
