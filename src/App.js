@@ -103,12 +103,11 @@ function App() {
                   }else{
                     alert("중요 목록은 최대 3개입니다")
                   }
-                }} >{
-        
+                }} >
+                  {
                   importantList.map((a)=>{
-                    return <ImportantTask task={a} />
+                    return <ImportantTask importantList={importantList}  setImportantList={setImportantList} task={a} />
                   })
-
                 }
               </div>
             </div>
@@ -122,7 +121,7 @@ function App() {
                 }} onChange={(e) => {
                   setText(e.target.value)
                 }} placeholder=" add task" />
-                <button onClick={(e) => {
+                <button className="task-add-but" onClick={(e) => {
                   let template = {
                     taskContent: text,
                     id: newID(),
@@ -221,12 +220,27 @@ function App() {
   );
 }
 
-function ImportantTask({task}) {
+function ImportantTask({task,setImportantList}) {
+  let importantList = JSON.parse(localStorage.getItem('importantList'));
+  let index = importantList.findIndex((a)=>{
+    return a.id==task.id
+  })
   return (
-    <div className="important-task">
-      <FontAwesomeIcon icon={faXmark} className="important-task-delete" />
-      <h6>{task.taskContent}</h6>
-      <FontAwesomeIcon icon={faCheckCircle} className="important-task-check" />
+    <div className={`important-task ${importantList[index].isComplete? "important-task-check":""}`}>
+      <FontAwesomeIcon onClick={()=>{
+        let copy = [...importantList]
+        copy.splice(importantList[index],1)
+        setImportantList(copy)
+        localStorage.setItem("importantList",JSON.stringify(copy))
+      }} icon={faXmark} className="important-task-delete" />
+      <h6 className={importantList[index].isComplete? "important-text-check":""}>{task.taskContent}</h6>
+      <FontAwesomeIcon onClick={()=>{
+        let copy = [...importantList]
+        copy[index].isComplete == false ?
+        copy[index].isComplete = true : copy[index].isComplete = false
+        setImportantList(copy)
+        localStorage.setItem('importantList', JSON.stringify(copy));
+      }} icon={faCheckCircle} className={`important-icon-check ${importantList[index].isComplete? "important-check":""}`}/>
     </div>
   )
 }

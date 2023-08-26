@@ -145,7 +145,11 @@ h2 {
   transition: all 0.4s;
 }
 
-
+.task-add-but:hover{
+  background-color: #be79e1;
+  color: white;
+  transition: all 0.5s;
+}
 .done {
   text-decoration: line-through;
   transition: all 0.5s;
@@ -299,15 +303,15 @@ h5 {
   transition: all 0.2s;
 }
 
-.important-task-check:hover,
+
 .heart:hover{
   color: #be79e1;
   transition: all 0.4s;
 }
 
-.favorite {
+.favorite,.important-icon-check {
   color: #be79e1;
-  transition: all 0.4s;
+  
 }
 
 .user-delete {
@@ -338,7 +342,7 @@ h5 {
 }
 
 .important-task{
-  width:33.3%;
+  width:31%;
   height: 95%;
   padding: 10px 15px;
   display: flex;
@@ -347,16 +351,35 @@ h5 {
   background-color: white;
   border-radius: 10px;
   margin: 0 10px;
+  transition : all 0.5s;
 }
 .important-task h6{
   text-align: center;
   font-weight: 600;
 }
-.important-task-check{
-  font-size: 25px;
+.important-icon-check{
+  font-size: 30px;
   color: #e4e4e4;
 }
 .important-task-delete{
   position: relative;
   left: 110px;
+}
+
+.important-check{
+  color: white;
+}
+.important-task-check{
+  background-color:  #be79e184;
+  transform: scale(1.05);
+  transition : all 0.5s;
+
+}
+
+.end{
+
+}
+
+.important-text-check{
+   text-decoration: line-through;
 }
