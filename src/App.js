@@ -113,7 +113,7 @@ function App() {
               <div className="task-add">
                 <input onClick={(e) => {
                   if (e.target.value) {
-                    e.target.value.innerText = ""
+                    e.target.value = ""
                   }
                 }} onChange={(e) => {
                   setText(e.target.value)
