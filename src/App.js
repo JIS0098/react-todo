@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEraser, faPhone, faEnvelope, faMapMarkerAlt, faPlus, faHeart, faTimesCircle, faCheck, faXmark, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faEraser, faPhone, faEnvelope, faMapMarkerAlt, faPlus, faHeart, faTimesCircle, faCheck, faXmark, faCheckCircle, faL } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   var newID = function () { return Math.random().toString(36).substr(2, 16); }
@@ -18,9 +18,11 @@ function App() {
     company: '',
     favorite: false
   });
+  let [search, setSearch] = useState('');
+  let [searchOn, setSearchOn] = useState(false);
   let [favorite, setFavorite] = useState(false);
   let [saveOn, setSaveOn] = useState(false);
-  let [importantList,setImportantList]=useState([])
+  let [importantList, setImportantList] = useState([])
   let { name, tel, email, company } = inputs;
 
   let onChange = (e) => {
@@ -66,13 +68,13 @@ function App() {
       localStorage.setItem('importantList', JSON.stringify([]))
     }
 
-    
+
 
     let todoList = JSON.parse(localStorage.getItem('todoList'))
     setTask([...todoList])
     let userList = JSON.parse(localStorage.getItem('userList'))
     setUserList([...userList])
-    let importantList =JSON.parse(localStorage.getItem('importantList'))
+    let importantList = JSON.parse(localStorage.getItem('importantList'))
     setImportantList([...importantList])
 
 
@@ -90,20 +92,20 @@ function App() {
               <h3>중요 목록</h3>
               <div className="important-list" onDragOver={(e) => { e.preventDefault(); }}
                 onDrop={(e) => {
-                  let index=e.dataTransfer.getData("index")
+                  let index = e.dataTransfer.getData("index")
                   e.preventDefault();
                   let copy = [...importantList]
-                  if(copy.length<3){
+                  if (copy.length < 3) {
                     copy.push(task[index])
-                    localStorage.setItem('importantList',JSON.stringify(copy))
+                    localStorage.setItem('importantList', JSON.stringify(copy))
                     setImportantList(copy);
-                  }else{
+                  } else {
                     alert("중요 목록은 최대 3개입니다")
                   }
                 }} >
-                  {
-                  importantList.map((a)=>{
-                    return <ImportantTask importantList={importantList}  setImportantList={setImportantList} task={a} />
+                {
+                  importantList.map((a) => {
+                    return <ImportantTask importantList={importantList} setImportantList={setImportantList} task={a} />
                   })
                 }
               </div>
@@ -143,26 +145,35 @@ function App() {
             <div className="phone-book">
               <div className="phone-book-header">
                 <h3>연락처</h3>
-                <FontAwesomeIcon onClick={() => {setSave(true); setSaveOn(true)}} icon={faPlus} className="fa-xl"/>
+                <FontAwesomeIcon onClick={() => { setSave(true); setSaveOn(true) }} icon={faPlus} className="fa-xl" />
               </div>
               <div className="search">
-                <input type="text" placeholder=" search user"/>
+                <input onChange={(e) => {
+                  let keyword = e.target.value
+                  setSearch(keyword)
+                  if (keyword != "") {
+                    setSearchOn(true);
+                  } else {
+                    setSearchOn(false);
+                  }
+                }} type="text" placeholder=" search user" />
               </div>
               <div className="user-list">
                 <div className="user-menu">
-                  <div onClick={() => {setFavorite(false)}} >전체({userList.length})</div>
-                  <div onClick={() => {setFavorite(true)}}>즐겨찾기({count})</div>
+                  <div onClick={() => { setFavorite(false); setSearchOn(false); }} >전체({userList.length})</div>
+                  <div onClick={() => { setFavorite(true); setSearchOn(false); }}>즐겨찾기({count})</div>
                 </div>
                 <div className="card-list">
                   {
-                    favorite === false ?
-                      userList.map((a) => {return (<Card user={a} setUserList={setUserList} />)})
-                      : userList.map((a) => {
-                        return (
-                          a.favorite ?
-                            <Card user={a} setUserList={setUserList} /> : ""
-                        )
-                      })
+                    searchOn ?
+                      "" : favorite ?
+                        userList.map((a) => {
+                          return (
+                            a.favorite ?
+                              <Card user={a} setUserList={setUserList} /> : ""
+                          )
+                        })
+                        : userList.map((a) => { return (<Card user={a} setUserList={setUserList} />) })
                   }
                 </div>
               </div>
@@ -186,8 +197,8 @@ function App() {
                   <input name="company" onChange={onChange} value={company} type="text" placeholder="소속을 입력해주세요." />
                 </div>
                 <div className="save-but">
-                  <button onClick={() => {setSaveOn(false); onReset();}}>저장</button>
-                  <button onClick={() => { setSave(false);setSaveOn(false);}}>닫기</button>
+                  <button onClick={() => { setSaveOn(false); onReset(); }}>저장</button>
+                  <button onClick={() => { setSave(false); setSaveOn(false); }}>닫기</button>
                 </div>
               </div>
             </div>
@@ -198,27 +209,27 @@ function App() {
   );
 }
 
-function ImportantTask({task,setImportantList}) {
+function ImportantTask({ task, setImportantList }) {
   let importantList = JSON.parse(localStorage.getItem('importantList'));
-  let index = importantList.findIndex((a)=>{
-    return a.id==task.id
+  let index = importantList.findIndex((a) => {
+    return a.id == task.id
   })
   return (
-    <div className={`important-task ${importantList[index].isComplete? "important-task-check":""}`}>
-      <FontAwesomeIcon onClick={()=>{
+    <div className={`important-task ${importantList[index].isComplete ? "important-task-check" : ""}`}>
+      <FontAwesomeIcon onClick={() => {
         let copy = [...importantList]
-        copy.splice(importantList[index],1)
+        copy.splice(importantList[index], 1)
         setImportantList(copy)
-        localStorage.setItem("importantList",JSON.stringify(copy))
+        localStorage.setItem("importantList", JSON.stringify(copy))
       }} icon={faXmark} className="important-task-delete" />
-      <h6 className={importantList[index].isComplete? "important-text-check":""}>{task.taskContent}</h6>
-      <FontAwesomeIcon onClick={()=>{
+      <h6 className={importantList[index].isComplete ? "important-text-check" : ""}>{task.taskContent}</h6>
+      <FontAwesomeIcon onClick={() => {
         let copy = [...importantList]
         copy[index].isComplete == false ?
-        copy[index].isComplete = true : copy[index].isComplete = false
+          copy[index].isComplete = true : copy[index].isComplete = false
         setImportantList(copy)
         localStorage.setItem('importantList', JSON.stringify(copy));
-      }} icon={faCheckCircle} className={`important-icon-check ${importantList[index].isComplete? "important-check":""}`}/>
+      }} icon={faCheckCircle} className={`important-icon-check ${importantList[index].isComplete ? "important-check" : ""}`} />
     </div>
   )
 }
@@ -232,10 +243,10 @@ function Task({ task, setTask }) {
 
   return (
     <div id={task.id} draggable="true" onDragStart={(e) => {
-      let index = todoList.findIndex((a)=>{
-        return a.id==e.target.id
+      let index = todoList.findIndex((a) => {
+        return a.id == e.target.id
       })
-      e.dataTransfer.setData("index",index)
+      e.dataTransfer.setData("index", index)
     }} className={`task start ${task.isComplete ? "done" : ""}`}>
       <FontAwesomeIcon className="check" icon={faCheck} onClick={() => {
         let copy = [...todoList]
