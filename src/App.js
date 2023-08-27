@@ -150,9 +150,12 @@ function App() {
               <div className="search">
                 <input onChange={(e) => {
                   let keyword = e.target.value
-                  setSearch(keyword)
                   if (keyword != "") {
                     setSearchOn(true);
+                    let searchUser = userList.filter((a)=>{
+                      return a.name.includes(keyword) || a.tel.includes(keyword) ||a.company.includes(keyword)
+                    })
+                    setSearch(searchUser);
                   } else {
                     setSearchOn(false);
                   }
@@ -166,7 +169,9 @@ function App() {
                 <div className="card-list">
                   {
                     searchOn ?
-                      "" : favorite ?
+                      search.map((a)=>{
+                        return (<Card user={a} setUserList={setUserList} />)
+                      }) : favorite ?
                         userList.map((a) => {
                           return (
                             a.favorite ?
