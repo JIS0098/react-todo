@@ -1,20 +1,13 @@
 .App {
-  padding-top: 25px;
+  padding-top: 40px;
 }
 
-
-.all-screen {
-  display: flex;
-  justify-content: space-around;
-  padding-top: 20px;
-}
-
-.all-screen>* {
-  padding: 15px
+.all-screen > * {
+  padding: 0 15px;
 }
 
 .task-main {
-  height: 830px;
+  height: 800px;
 }
 
 .task {
@@ -25,12 +18,10 @@
   border-bottom: 1px solid rgb(233, 233, 233);
 }
 
-.task>* {
+.task > * {
   margin: 0;
   padding: 10px;
 }
-
-
 
 .task-board {
   width: 100%;
@@ -39,7 +30,6 @@
   background-color: #e4e4e4;
   border-radius: 8px;
   padding-top: 22.5px;
-
 }
 
 .task-list {
@@ -66,11 +56,9 @@ p {
   font-size: 14px;
 }
 
-
 .phone-main {
   height: 830px;
 }
-
 
 .phone-book {
   width: 100;
@@ -104,7 +92,6 @@ p {
   border-radius: 5px;
   background-color: white;
 }
-
 
 input::-webkit-input-placeholder {
   color: lightgray;
@@ -145,7 +132,7 @@ h2 {
   transition: all 0.4s;
 }
 
-.task-add-but:hover{
+.task-add-but:hover {
   background-color: #be79e1;
   color: white;
   transition: all 0.5s;
@@ -164,7 +151,7 @@ h2 {
 .search {
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }
 
 .search input {
@@ -222,7 +209,6 @@ h5 {
 
 .user-list {
   margin-top: 20px;
-
 }
 
 .card-list {
@@ -241,7 +227,6 @@ h5 {
   background: rgb(138, 138, 138);
   /* 스크롤바의 색상 */
   border-radius: 10px;
-
 }
 
 .card-list::-webkit-scrollbar-track {
@@ -263,7 +248,7 @@ h5 {
   padding: 20px 15px 5px 15px;
 }
 
-.save>* {
+.save > * {
   margin-bottom: 8px;
 }
 
@@ -277,7 +262,6 @@ h5 {
 .save-but {
   display: flex;
   justify-content: right;
-
 }
 
 .save-but button {
@@ -303,15 +287,14 @@ h5 {
   transition: all 0.2s;
 }
 
-
-.heart:hover{
+.heart:hover {
   color: #be79e1;
   transition: all 0.4s;
 }
 
-.favorite,.important-icon-check {
+.favorite,
+.important-icon-check {
   color: #be79e1;
-  
 }
 
 .user-delete {
@@ -329,11 +312,11 @@ h5 {
   box-sizing: border-box;
 }
 
-.important h3{
+.important h3 {
   padding-left: 7px;
 }
 
-.important-list{
+.important-list {
   display: flex;
   align-items: center;
   width: 100%;
@@ -341,8 +324,8 @@ h5 {
   border-radius: 8px;
 }
 
-.important-task{
-  width:31%;
+.important-task {
+  width: 31%;
   height: 95%;
   padding: 10px 15px;
   display: flex;
@@ -351,35 +334,45 @@ h5 {
   background-color: white;
   border-radius: 10px;
   margin: 0 10px;
-  transition : all 0.5s;
+  transition: all 0.5s;
 }
-.important-task h6{
+.important-task h6 {
   text-align: center;
   font-weight: 600;
 }
-.important-icon-check{
+.important-icon-check {
   font-size: 30px;
   color: #e4e4e4;
 }
-.important-task-delete{
+.important-task-delete {
   position: relative;
   left: 110px;
 }
 
-.important-check{
+.important-check {
   color: white;
 }
-.important-task-check{
-  background-color:  #be79e184;
+.important-task-check {
+  background-color: #be79e184;
   transform: scale(1.05);
-  transition : all 0.5s;
-
+  transition: all 0.5s;
+}
+.important-text-check {
+  text-decoration: line-through;
+}
+.day-main{
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.day-main h1 {
+  color: #be79e1;
+  font-weight: 600;
+  margin: 0;
 }
 
-.end{
-
-}
-
-.important-text-check{
-   text-decoration: line-through;
+.day-main h6 {
+  font-weight: 600;
+  margin-left: 10px;
+  margin-bottom: -20px;
 }

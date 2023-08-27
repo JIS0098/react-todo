@@ -24,7 +24,7 @@ function App() {
   let [saveOn, setSaveOn] = useState(false);
   let [importantList, setImportantList] = useState([])
   let { name, tel, email, company } = inputs;
-
+  let toDay = new Date();
   let onChange = (e) => {
     let { name, value } = e.target;
     setInputs({
@@ -51,8 +51,9 @@ function App() {
       email: '',
       company: '',
     });
-    console.log(userList)
   };
+
+
 
 
 
@@ -83,8 +84,11 @@ function App() {
   return (
     <div className="App">
       <Container className="all">
-        <Row className="day-main">
-          <h1>2023.01.25</h1>
+        <Row>
+          <Col sm={12} className="day-main">
+            <h1>MY TASK</h1>
+              <h6>{toDay.getFullYear()}.{toDay.getMonth() + 1 < 10 ? `0${toDay.getMonth() + 1}` : toDay.getMonth() + 1}.{toDay.getDate()}</h6>
+          </Col>
         </Row>
         <Row className="all-screen" >
           <Col className="task-main" xl={8}>
@@ -152,8 +156,8 @@ function App() {
                   let keyword = e.target.value
                   if (keyword != "") {
                     setSearchOn(true);
-                    let searchUser = userList.filter((a)=>{
-                      return a.name.includes(keyword) || a.tel.includes(keyword) ||a.company.includes(keyword)
+                    let searchUser = userList.filter((a) => {
+                      return a.name.includes(keyword) || a.tel.includes(keyword) || a.company.includes(keyword)
                     })
                     setSearch(searchUser);
                   } else {
@@ -169,7 +173,7 @@ function App() {
                 <div className="card-list">
                   {
                     searchOn ?
-                      search.map((a)=>{
+                      search.map((a) => {
                         return (<Card user={a} setUserList={setUserList} />)
                       }) : favorite ?
                         userList.map((a) => {
