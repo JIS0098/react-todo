@@ -104,7 +104,7 @@ function App() {
                     localStorage.setItem('importantList', JSON.stringify(copy))
                     setImportantList(copy);
                   } else {
-                    alert("중요 목록은 최대 3개입니다")
+                    alert("중요 목록은 최대 3개까지 저장됩니다.")
                   }
                 }} >
                 {
@@ -152,7 +152,8 @@ function App() {
                 <FontAwesomeIcon onClick={() => { setSave(true); setSaveOn(true) }} icon={faPlus} className="fa-xl" />
               </div>
               <div className="search">
-                <input onChange={(e) => {
+                <input onClick={(e) => { if (e.target.value) {e.target.value = ""}
+                }} onChange={(e) => {
                   let keyword = e.target.value
                   if (keyword != "") {
                     setSearchOn(true);
