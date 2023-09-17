@@ -149,7 +149,7 @@ function App() {
             <div className="phone-book">
               <div className="phone-book-header">
                 <h3>연락처</h3>
-                <FontAwesomeIcon onClick={() => { setSave(true); setSaveOn(true) }} icon={faPlus} className="fa-xl" />
+                <FontAwesomeIcon  onClick={() => { setSave(true); setSaveOn(true) }} icon={faPlus} className="fa-xl pointer" />
               </div>
               <div className="search">
                 <input onClick={(e) => { if (e.target.value) {e.target.value = ""}
@@ -168,19 +168,19 @@ function App() {
               </div>
               <div className="user-list">
                 <div className="user-menu">
-                  <div onClick={() => { setFavorite(false); setSearchOn(false); }} >전체({userList.length})</div>
-                  <div onClick={() => { setFavorite(true); setSearchOn(false); }}>즐겨찾기({count})</div>
+                  <div className="pointer" onClick={() => { setFavorite(false); setSearchOn(false); }} >전체({userList.length})</div>
+                  <div className="pointer" onClick={() => { setFavorite(true); setSearchOn(false); }}>즐겨찾기({count})</div>
                 </div>
                 <div className="card-list">
                   {
                     searchOn ?
                       search.map((a) => {
-                        return (<Card user={a} setUserList={setUserList} />)
+                        return (<Card className="pointer" user={a} setUserList={setUserList} />)
                       }) : favorite ?
                         userList.map((a) => {
                           return (
                             a.favorite ?
-                              <Card user={a} setUserList={setUserList} /> : ""
+                              <Card className="pointer" user={a} setUserList={setUserList} /> : ""
                           )
                         })
                         : userList.map((a) => { return (<Card user={a} setUserList={setUserList} />) })
@@ -226,12 +226,12 @@ function ImportantTask({ task, setImportantList }) {
   })
   return (
     <div className={`important-task ${importantList[index].isComplete ? "important-task-check" : ""}`}>
-      <FontAwesomeIcon onClick={() => {
+      <FontAwesomeIcon  onClick={() => {
         let copy = [...importantList]
         copy.splice(importantList[index], 1)
         setImportantList(copy)
         localStorage.setItem("importantList", JSON.stringify(copy))
-      }} icon={faXmark} className="important-task-delete" />
+      }} icon={faXmark} className="important-task-delete pointer" />
       <h6 className={importantList[index].isComplete ? "important-text-check" : ""}>{task.taskContent}</h6>
       <FontAwesomeIcon onClick={() => {
         let copy = [...importantList]
@@ -239,7 +239,7 @@ function ImportantTask({ task, setImportantList }) {
           copy[index].isComplete = true : copy[index].isComplete = false
         setImportantList(copy)
         localStorage.setItem('importantList', JSON.stringify(copy));
-      }} icon={faCheckCircle} className={`important-icon-check ${importantList[index].isComplete ? "important-check" : ""}`} />
+      }} icon={faCheckCircle} className={`pointer important-icon-check ${importantList[index].isComplete ? "important-check" : ""}`} />
     </div>
   )
 }
@@ -258,19 +258,19 @@ function Task({ task, setTask }) {
       })
       e.dataTransfer.setData("index", index)
     }} className={`task start ${task.isComplete ? "done" : ""}`}>
-      <FontAwesomeIcon className="check" icon={faCheck} onClick={() => {
+      <FontAwesomeIcon className="check pointer" icon={faCheck} onClick={() => {
         let copy = [...todoList]
         copy[index].isComplete == false ?
           copy[index].isComplete = true : copy[index].isComplete = false
         setTask([...copy])
         localStorage.setItem('todoList', JSON.stringify(copy));
       }} />
-      <p>{task.taskContent}</p>
+      <p className="grabbing">{task.taskContent}</p>
       <FontAwesomeIcon onClick={() => {
         todoList.splice(index, 1)
         setTask([...todoList])
         localStorage.setItem('todoList', JSON.stringify(todoList));
-      }} className="delete fa-lg" icon={faEraser} />
+      }} className="delete fa-lg pointer" icon={faEraser} />
     </div>
   )
 }
@@ -293,13 +293,13 @@ function Card({ user, setUserList }) {
               copy[index].favorite = true : copy[index].favorite = false
             setUserList(copy)
             localStorage.setItem('userList', JSON.stringify(copy));
-          }} icon={faHeart} className={`heart ${user.favorite ? "favorite" : ""}`} />
+          }} icon={faHeart} className={`pointer heart ${user.favorite ? "favorite" : ""}`} />
           <FontAwesomeIcon onClick={() => {
             let copy = [...userList]
             copy.splice([index], 1)
             setUserList(copy)
             localStorage.setItem('userList', JSON.stringify(copy));
-          }} icon={faTimesCircle} className="user-delete" />
+          }} icon={faTimesCircle} className="user-delete pointer" />
         </div>
       </div>
       <div className="line"></div>

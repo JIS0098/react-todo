@@ -1,7 +1,13 @@
 .App {
   padding-top: 40px;
 }
+.pointer {
 
+  cursor: pointer;
+}
+.grabbing:focus{
+  cursor:grabbing;
+}
 .all-screen > * {
   padding: 0 15px;
 }
