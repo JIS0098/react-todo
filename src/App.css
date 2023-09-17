@@ -5,8 +5,11 @@
 
   cursor: pointer;
 }
-.grabbing:focus{
-  cursor:grabbing;
+.grabbing:hover{
+  cursor:grab;
+}
+.grabbing:active{
+  cursor:grab;
 }
 .all-screen > * {
   padding: 0 15px;
