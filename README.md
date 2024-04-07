@@ -10,9 +10,6 @@
   <a href="http://dev.co-kkiri.com/"><p>CO-KKIRI에서 팀원 모집하러 가기👩‍👧‍👦</p></a>
   <a href="https://github.com/sozign/codeit-top-secret-X/wiki"><p>notion 바로가기🔗</p></a>
 </div>
-
-<br>
-
 <br>
 
 # 프로젝트 소개
